@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agents 是什麼？｜教學簡報</title>
+<style>
+:root{--bg:#0b1020;--panel:#151e33;--ink:#f4f7ff;--muted:#b6c3dc;--accent:#78dcca;--gold:#ffd27d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif}
+.slide{min-height:100vh;padding:7vh 9vw;display:none;position:relative;overflow:auto;background:radial-gradient(circle at 85% 12%,#1c3650 0,transparent 32%),var(--bg)}
+.slide.active{display:flex;flex-direction:column;justify-content:center}.eyebrow{color:var(--accent);letter-spacing:.15em;font-weight:700}
+h1{font-size:clamp(2.6rem,7vw,5.8rem);line-height:1.12;margin:.2em 0}h2{font-size:clamp(2rem,4.8vw,3.8rem);margin:.2em 0 .55em}
+p,li{font-size:clamp(1.1rem,2vw,1.55rem);line-height:1.65;color:var(--muted)}strong{color:var(--ink)}.accent{color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
+.card{background:var(--panel);border:1px solid #2c3b58;border-radius:18px;padding:22px}.card h3{font-size:1.35rem;margin:.1em 0 .5em;color:var(--gold)}.card p{font-size:1.08rem;margin:0}
+.big{font-size:clamp(1.5rem,3vw,2.4rem);color:var(--ink);max-width:950px}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0}.step{background:#1a2b42;border:1px solid #3b5874;border-radius:12px;padding:14px 18px;font-size:1.12rem}.arrow{color:var(--accent);font-size:1.5rem}
+footer{position:absolute;bottom:22px;left:9vw;right:9vw;display:flex;justify-content:space-between;color:#8090aa;font-size:.9rem}
+.controls{position:fixed;right:24px;bottom:20px;display:flex;gap:8px;z-index:5}button{border:1px solid #526783;background:#1a2941;color:white;border-radius:999px;padding:10px 17px;font-size:1rem;cursor:pointer}button:hover{border-color:var(--accent)}
+.progress{position:fixed;top:0;left:0;height:4px;background:var(--accent);width:0;z-index:6}
+small{color:#91a4c1}.source{font-size:.95rem;line-height:1.5;overflow-wrap:anywhere}
+@media(max-width:600px){.slide{padding:7vh 7vw 12vh}.controls{right:12px;bottom:10px}footer{left:7vw;right:7vw}}
+</style></head><body>
+<div class="progress" id="progress"></div>
+<section class="slide active"><div class="eyebrow">LLM WIKI · 入門教學</div><h1>AI Agents<br><span class="accent">是什麼？</span></h1><p class="big">從「只會回答」到「能採取行動」：用 8 張投影片理解 AI Agent 的概念、運作方式與風險。</p><p><small>使用方向鍵 ← → 或下方按鈕切換</small></p><footer><span>AI Agents 入門</span><span>01 / 08</span></footer></section>
+<section class="slide"><div class="eyebrow">01 · 核心概念</div><h2>Agent 不只是聊天機器人</h2><p class="big">AI Agent 是一種以<strong>目標</strong>為導向，能運用模型判斷、呼叫工具、觀察結果，並決定下一步的系統。</p><div class="grid"><div class="card"><h3>聊天機器人</h3><p>主要接收問題並產生文字回答，通常停在「回答」。</p></div><div class="card"><h3>AI Agent</h3><p>能拆解任務、使用外部工具、讀取結果，再繼續執行。</p></div></div><p>例：不只告訴你「哪家航空行李比較多」，還能查官方規定、整理數據並比較差異。</p><footer><span>定義與差異｜Wiki 01</span><span>02 / 08</span></footer></section>
+<section class="slide"><div class="eyebrow">02 · 基本組件</div><h2>Agent 的四個基本組件</h2><div class="grid"><div class="card"><h3>模型 Model</h3><p>理解任務、推理、規劃與生成內容。</p></div><div class="card"><h3>工具 Tools</h3><p>搜尋、計算、讀寫檔案或呼叫 API，讓系統能採取行動。</p></div><div class="card"><h3>指令與護欄</h3><p>規定目標、權限、格式、禁止事項與停止條件。</p></div><div class="card"><h3>狀態 State</h3><p>保存任務進度、工具結果與必要上下文。</p></div></div><footer><span>核心組件｜Wiki 02</span><span>03 / 08</span></footer></section>
+<section class="slide"><div class="eyebrow">03 · 運作循環</div><h2>Agent 如何完成任務？</h2><div class="flow"><span class="step">接收目標</span><b class="arrow">→</b><span class="step">規劃</span><b class="arrow">→</b><span class="step">呼叫工具</span><b class="arrow">→</b><span class="step">觀察結果</span><b class="arrow">→</b><span class="step">評估</span></div><p class="big">如果結果不理想，Agent 可以修正計畫，再跑一次循環；如果完成，就停止或交付成果。</p><div class="card"><h3>關鍵提醒</h3><p>循環不等於無限重試。要設最大步數、錯誤處理、權限限制與人工確認點。</p></div><footer><span>運作循環｜Wiki 02</span><span>04 / 08</span></footer></section>
+<section class="slide"><div class="eyebrow">04 · 流程設計</div><h2>Workflow、Agent、Graph 有何不同？</h2><div class="grid"><div class="card"><h3>Workflow</h3><p>開發者預先安排步驟與路徑，較可預測。</p></div><div class="card"><h3>Agent</h3><p>模型依狀態動態決定下一步，彈性較高。</p></div><div class="card"><h3>Graph</h3><p>用節點、邊與狀態描述流程，可表達分支與循環。</p></div></div><p>實務常採混合式：固定流程把關可靠性，局部 Agent 處理需要判斷的工作。</p><footer><span>Workflow 與 Graph｜Wiki 03</span><span>05 / 08</span></footer></section>
+<section class="slide"><div class="eyebrow">05 · 設計模式</div><h2>常見 Agent 設計模式</h2><ul><li><strong>Prompt chaining：</strong>前一步結果交給下一步。</li><li><strong>Routing：</strong>依輸入類型選擇路徑。</li><li><strong>Parallelization：</strong>把可平行的工作同時處理。</li><li><strong>Orchestrator-workers：</strong>主控者分派任務，再整合結果。</li><li><strong>Evaluator-optimizer：</strong>先產生草稿，再評估與修正。</li></ul><footer><span>設計模式｜Wiki 03</span><span>06 / 08</span></footer></section>
+<section class="slide"><div class="eyebrow">06 · 應用與風險</div><h2>能力越強，越需要治理</h2><div class="grid"><div class="card"><h3>應用</h3><p>研究資料整理、客服查詢、程式除錯、行程與行政任務。</p></div><div class="card"><h3>風險</h3><p>幻覺、工具誤用、權限過大、提示注入、循環失控。</p></div><div class="card"><h3>防護</h3><p>來源驗證、最小權限、人工確認、步數上限與完整紀錄。</p></div></div><p class="big">付款、刪除、寄送等高影響操作，應在執行前取得人類確認。</p><footer><span>應用與風險｜Wiki 04</span><span>07 / 08</span></footer></section>
+<section class="slide"><div class="eyebrow">07 · 重點回顧</div><h2>帶走這五個觀念</h2><ol><li>Agent 以目標為導向，不只是產生文字。</li><li>模型、工具、護欄與狀態共同構成系統。</li><li>Agent 透過「規劃—行動—觀察—評估」循環工作。</li><li>Workflow 較可控，Agent 較彈性，Graph 描述流程結構。</li><li>可靠的 Agent 必須有驗證、權限與停止條件。</li></ol><p class="source"><strong>Wiki 資料來源（5 篇）：</strong><br>
+S1 Anthropic, Building effective agents — anthropic.com/engineering/building-effective-agents<br>
+S2 OpenAI, A practical guide to building agents — cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf<br>
+S3 Google Cloud, What are AI agents? — cloud.google.com/discover/what-are-ai-agents<br>
+S4 IBM, What are AI agents? — ibm.com/think/topics/ai-agents<br>
+S5 LangChain, LangGraph overview — docs.langchain.com/oss/python/langgraph/overview</p><footer><span>結語與來源</span><span>08 / 08</span></footer></section>
+<div class="controls"><button onclick="move(-1)">← 上一頁</button><button onclick="move(1)">下一頁 →</button></div>
+<script>
+let current=0;const slides=[...document.querySelectorAll('.slide')];
+function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';}
+function move(d){show(current+d)}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){move(1)}if(e.key==='ArrowLeft'){move(-1)}});
+show(0);
+</script></body></html>
